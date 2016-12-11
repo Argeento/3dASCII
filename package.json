@@ -11,7 +11,6 @@
     "gulp-eslint": "^3.0.1",
     "gulp-htmlmin": "^3.0.0",
     "gulp-plumber": "^1.1.0",
-    "gulp-sass": "^3.0.0",
-    "gulp-uglify": "^2.0.0"
+    "gulp-sass": "^3.0.0"
   }
 }

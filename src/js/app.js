@@ -1,18 +1,17 @@
-const CrtAscii = require( './ascii_modules/crtAscii.js' );
-
+const CrtAscii = require( './crtAscii.js' );
 THREE.TrackballControls = require( './three_modules/trackballControls.js' );
 
-const asd = 130;
-
+const sizeInPixels = 130;
 let camera, scene, renderer, controls;
 
 function init() {
 
 	renderer = new THREE.WebGLRenderer();
-	renderer.setClearColor( 0x222222 );
+	renderer.setClearColor( 0xffffff );
 	renderer.setPixelRatio( window.devicePixelRatio );
-	renderer.setSize( asd, asd );
+	renderer.setSize( sizeInPixels, sizeInPixels );
 	document.body.appendChild( renderer.domElement );
+
 	scene = new THREE.Scene();
 	camera = new THREE.PerspectiveCamera( 43, 1, 1, 1000 );
 	camera.position.set( 0, 0, 500 );
@@ -20,17 +19,14 @@ function init() {
 	controls.minDistance = 200;
 	controls.maxDistance = 500;
 
-	scene.add( new THREE.AmbientLight( 0x111111 ) );
 	const light = new THREE.PointLight( 0xffffff );
 	light.position.copy( camera.position );
 	scene.add( light );
-	//
-
 
 	const texture = new THREE.TextureLoader().load( 'img/argeento.jpg' );
 	const geometry = new THREE.BoxBufferGeometry( 200, 200, 200 );
 	const material = new THREE.MeshBasicMaterial( { map: texture } );
-	mesh = new THREE.Mesh( geometry, material );
+	const mesh = new THREE.Mesh( geometry, material );
 	scene.add( mesh );
 }
 
@@ -50,9 +46,8 @@ const dimg = document.querySelector( '#dimg' );
 
 video.srcObject = cv.captureStream( 30 );
 
-const videoJscii = new CrtAscii( {
+const acii = new CrtAscii( {
 	destEl: dimg,
 	srcEl: video,
-	lineLength: asd,
+	lineLength: sizeInPixels,
 } );
-

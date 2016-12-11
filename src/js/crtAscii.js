@@ -4,9 +4,7 @@ class CrtAscii {
 		this.destEl = config.destEl;
 		this.srcEl = config.srcEl;
 
-
 		this.chars = '@#$=*!;:~-.  '.split( '' );
-		// this.chars = '█▓▒░ '.split( '' );
 
 		this.canvas = document.createElement( 'canvas' );
 		this.ctx = this.canvas.getContext( '2d' );
@@ -50,8 +48,6 @@ class CrtAscii {
 		const getChar = ( v ) => {
 			return this.chars[ parseInt( v * ( this.chars.length - 1 ), 10 ) ];
 		};
-
-		// const getChar = v => this.chars[ ~~( v * ( this.chars.length - 1)) ];
 
 		for ( let i = 0; i < asciiLength; i++ ) {
 

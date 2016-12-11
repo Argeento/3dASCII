@@ -20,7 +20,6 @@ gulp.task( 'js', () => {
 		.pipe( gulp.dest( './build/js' ) );
 } );
 
-
 gulp.task( 'css', () => {
 	gulp.src( 'src/sass/ascii.scss' )
 		.pipe( plumber() )

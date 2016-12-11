@@ -5,9 +5,7 @@ class CrtAscii {
 		this.destEl = config.destEl;
 		this.srcEl = config.srcEl;
 
-
 		this.chars = '@#$=*!;:~-.  '.split( '' );
-		// this.chars = '█▓▒░ '.split( '' );
 
 		this.canvas = document.createElement( 'canvas' );
 		this.ctx = this.canvas.getContext( '2d' );
@@ -52,8 +50,6 @@ class CrtAscii {
 			return this.chars[ parseInt( v * ( this.chars.length - 1 ), 10 ) ];
 		};
 
-		// const getChar = v => this.chars[ ~~( v * ( this.chars.length - 1)) ];
-
 		for ( let i = 0; i < asciiLength; i++ ) {
 
 			if ( i % this.lineLength === 0 ) {
@@ -73,21 +69,20 @@ class CrtAscii {
 module.exports = CrtAscii;
 
 },{}],2:[function(require,module,exports){
-const CrtAscii = require( './ascii_modules/crtAscii.js' );
-
+const CrtAscii = require( './crtAscii.js' );
 THREE.TrackballControls = require( './three_modules/trackballControls.js' );
 
-const asd = 130;
-
+const sizeInPixels = 130;
 let camera, scene, renderer, controls;
 
 function init() {
 
 	renderer = new THREE.WebGLRenderer();
-	renderer.setClearColor( 0x222222 );
+	renderer.setClearColor( 0xffffff );
 	renderer.setPixelRatio( window.devicePixelRatio );
-	renderer.setSize( asd, asd );
+	renderer.setSize( sizeInPixels, sizeInPixels );
 	document.body.appendChild( renderer.domElement );
+
 	scene = new THREE.Scene();
 	camera = new THREE.PerspectiveCamera( 43, 1, 1, 1000 );
 	camera.position.set( 0, 0, 500 );
@@ -95,17 +90,14 @@ function init() {
 	controls.minDistance = 200;
 	controls.maxDistance = 500;
 
-	scene.add( new THREE.AmbientLight( 0x111111 ) );
 	const light = new THREE.PointLight( 0xffffff );
 	light.position.copy( camera.position );
 	scene.add( light );
-	//
-
 
 	const texture = new THREE.TextureLoader().load( 'img/argeento.jpg' );
 	const geometry = new THREE.BoxBufferGeometry( 200, 200, 200 );
 	const material = new THREE.MeshBasicMaterial( { map: texture } );
-	mesh = new THREE.Mesh( geometry, material );
+	const mesh = new THREE.Mesh( geometry, material );
 	scene.add( mesh );
 }
 
@@ -125,14 +117,20 @@ const dimg = document.querySelector( '#dimg' );
 
 video.srcObject = cv.captureStream( 30 );
 
-const videoJscii = new CrtAscii( {
+const acii = new CrtAscii( {
 	destEl: dimg,
 	srcEl: video,
-	lineLength: asd,
+	lineLength: sizeInPixels,
 } );
 
+},{"./crtAscii.js":1,"./three_modules/trackballControls.js":3}],3:[function(require,module,exports){
+/**
+ * @author Eberhard Graether / http://egraether.com/
+ * @author Mark Lundin 	/ http://mark-lundin.com
+ * @author Simone Manini / http://daron1337.github.io
+ * @author Luca Antiga 	/ http://lantiga.github.io
+ */
 
-},{"./ascii_modules/crtAscii.js":1,"./three_modules/trackballControls.js":3}],3:[function(require,module,exports){
 const TrackballControls = function ( object, domElement ) {
 
 	var _this = this;
